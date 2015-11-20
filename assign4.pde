@@ -130,31 +130,36 @@ image(backgroundImg2,bgQ,0);
      }
      image(shipImg1,fighterX,fighterY);
 //enemy
-float last=enemyX - 165; //save last X position and go back
- for (int i=0;i<COUNT;i++){
-    for(i=0;i<5;i++)
-      {
-        image(shipImg2,enemyX-i*60,enemyY);     
+      for (int i=0;i<COUNT;i++){
+        image(shipImg2,enemyX-i*40,enemyY);
+      } 
+   
+      if(enemyX>=640+165){  
+        enemyQ=0;
+      }    
+      for (int i=0;i<COUNT;i++){
+        image(shipImg2,enemyQ-i*40,enemyW+i*60);
       }
-      
-  } 
-if(enemyX>=640){    //enemyX will grow and bigger than 640, like 650 660..., so we cannot write enemyX==640
-   enemyW=random((450));
-   for (int i=0;i<COUNT;i++){
- image(shipImg2,enemyQ-i*60,enemyW+i*40);   
-   }
-}
+     enemyQ+=3;
+     if(enemyQ>=640+165){
+        enemyX=0;
+         for (int i=0;i<COUNT;i++){
+        image(shipImg2,enemyX-i*40,enemyY);
+      } 
+   
+     }
 if(fighterX >= enemyX && fighterX <= enemyX+50 && fighterY >= enemyY && fighterY <= enemyY+50){
      int i = (currentFlame++)%flame;
      image(images [i],enemyX,enemyY);
+     i-=1;
      enemyX=900;
-     rectX-=50;
+     rectX-=20;
 } 
-if((fighterX+50) >= enemyX && (fighterX+50) <= enemyX+50 && (fighterY+50) >= enemyY && (fighterY+50) <= enemyY+50){
+if((fighterX+50) >= enemyQ && (fighterX+50) <= enemyQ+50 && (fighterY+50) >= enemyW && (fighterY+50) <= enemyW+50){
      int i = (currentFlame++)%flame;
-     image(images [i],enemyX,enemyY);
-     enemyX=900;
-     rectX-=50;
+     image(images [i],enemyQ,enemyW);
+     enemyQ=900;
+     rectX-=20;
  }
      if(fighterX >= thingX && fighterX <= thingX+30 && fighterY >= thingY && fighterY <= thingY+30 ){
        rectX += 50;
