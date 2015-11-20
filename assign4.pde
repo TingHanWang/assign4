@@ -54,9 +54,10 @@ void setup (){
   lost1 = loadImage("img/end1.png");
   lost2 = loadImage("img/end2.png");
   currentFlame=0;
-  frameRate(24);
- 
-  gameState = GAME_START;
+  frameRate(30);
+ gameState = GAME_START;
+  enemyQ=0;
+  enemyW=240;
   bgX=0;
   bgQ=bgX-640;
    enemyX=0;
@@ -89,7 +90,22 @@ void draw(){
        image(startImg2,0,0);
       }
     }
-  
+   enemyQ=0;
+  enemyW=240;
+  bgX=0;
+  bgQ=bgX-640;
+   enemyX=0;
+  enemyY=240;
+  bgX=0;
+  bgQ=bgX-640;
+  fighterX=580;
+  fighterY=240;
+  rectX = 200;
+  fighterX = 580;
+  fighterY = 240;
+  rectY = 20;
+  thingX = 200;
+  thingY = 300;
       break;
     case GAME_RUN:
     //background
@@ -104,16 +120,16 @@ image(backgroundImg1,bgX,0);
 image(backgroundImg2,bgQ,0);
      //fighter
      if(upPressed){
-       fighterY -=speed;
+       fighterY -=8;
      }
      if(downPressed){
-       fighterY += speed;
+       fighterY += 8;
      }
      if(leftPressed){
-       fighterX -= speed;
+       fighterX -= 8;
      }
      if(rightPressed){
-       fighterX += speed;
+       fighterX += 8;
      }
      //no over
      if(fighterY > 480){
@@ -135,20 +151,11 @@ image(backgroundImg2,bgQ,0);
       } 
    
       if(enemyX>=640+165){  
-        enemyQ=0;
-      }    
-      for (int i=0;i<COUNT;i++){
-        image(shipImg2,enemyQ-i*40,enemyW+i*60);
-      }
-     enemyQ+=3;
-     if(enemyQ>=640+165){
         enemyX=0;
-         for (int i=0;i<COUNT;i++){
-        image(shipImg2,enemyX-i*40,enemyY);
-      } 
+        enemyY=random(30,240);
+  }    
    
-     }
-if(fighterX >= enemyX && fighterX <= enemyX+50 && fighterY >= enemyY && fighterY <= enemyY+50){
+if(fighterX >= enemyX-150 && fighterX <= enemyX+50 && fighterY >= enemyY && fighterY <= enemyY+50){
      int i = (currentFlame++)%flame;
      image(images [i],enemyX,enemyY);
      i-=1;
